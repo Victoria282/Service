@@ -3,6 +3,7 @@ package com.example.service
 import android.app.Service
 import android.content.ContentValues.TAG
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Handler
 import android.os.IBinder
 import android.util.Log
@@ -21,12 +22,20 @@ class ServiceRandomNumbers : Service() {
     // Runnable - интерфейс для реализации потока, при помощи абстр.метода run()
     private lateinit var runnable:Runnable
 
+    // Музыка в фоне
+    private lateinit var mediaPlayer: MediaPlayer
+
     override fun onBind(intent: Intent): IBinder? {
         return null
     }
 
     // Запуск при нажатии на кнопку "старт"
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        // Музыка
+        mediaPlayer = MediaPlayer.create(this, R.raw.music)
+        mediaPlayer.isLooping
+        mediaPlayer.start()
+
         handler = Handler()
 
         runnable = Runnable {
@@ -38,7 +47,7 @@ class ServiceRandomNumbers : Service() {
                 handler.postDelayed(runnable, 10000)
             }
         }
-        // повторяем действие через 1000 миллисекунд
+        // повторяем действие через 10000 миллисекунд
         handler.postDelayed(runnable, 10000)
         return super.onStartCommand(intent, flags, startId)
     }
@@ -47,5 +56,6 @@ class ServiceRandomNumbers : Service() {
         super.onDestroy()
         // Удаляем Runnable-объект для прекращения задачи
         handler.removeCallbacks(runnable)
+        mediaPlayer.stop()
     }
 }
