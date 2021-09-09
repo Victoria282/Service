@@ -21,14 +21,12 @@ class MainActivity : AppCompatActivity() {
             // Запуск сервиса
             startService(Intent(this, ServiceRandomNumbers::class.java))
             Log.e(TAG, "Нажата кнопка Start!")
-            Toast.makeText(this, "Сервис запущен!", Toast.LENGTH_SHORT)
         }
 
         buttonStop.setOnClickListener() {
             // Остановка сервиса
             stopService(Intent(this, ServiceRandomNumbers::class.java))
             Log.e(TAG, "Нажата кнопка Stop!")
-            Toast.makeText(this, "Сервис остановлен!", Toast.LENGTH_SHORT)
         }
 
     }
