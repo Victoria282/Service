@@ -62,15 +62,3 @@ class ServiceRandomNumbers : Service() {
         mediaPlayer?.stop()
     }
 }
-
-/*
-  val showInfo: Runnable = object : Runnable {
-            override fun run() {
-                val rand = Random()
-                val number: Int = rand.nextInt(1000)
-                // Вывод в консоль
-                Log.e(TAG, "Число:  $number")
-                handler.postDelayed(this, 1000)
-            }
-        }
-* */
